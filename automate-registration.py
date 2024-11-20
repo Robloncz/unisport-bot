@@ -149,5 +149,5 @@ if __name__ == "__main__":
         print("Could not find an active registration link within the time limit.")
     
     # Keep the browser open for a few seconds
-    time.sleep(5)
+    time.sleep(120)
     bot.close()
