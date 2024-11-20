@@ -102,11 +102,22 @@ class UnisportRegistration:
             self.driver.find_element(By.NAME, "Mail").send_keys(user_data['email'])
             self.driver.find_element(By.NAME, "Tel").send_keys(user_data['phone'])
             
-            # Click the submit button
+            # Click the first submit button "weiter zur Buchung"
             submit_button = self.driver.find_element(By.CSS_SELECTOR, "input[value='weiter zur Buchung']")
             submit_button.click()
             
-            print("Form submitted successfully!")
+            print("Initial form submitted! Proceeding to final confirmation...")
+            
+            # Wait for the confirmation page and final submit button
+            WebDriverWait(self.driver, 10).until(
+                EC.presence_of_element_located((By.CSS_SELECTOR, "input[value='verbindliche Buchung']"))
+            )
+            
+            # Click the final "verbindliche Buchung" button
+            final_submit = self.driver.find_element(By.CSS_SELECTOR, "input[value='verbindliche Buchung']")
+            final_submit.click()
+            
+            print("Final registration submitted successfully!")
             time.sleep(5)
             
         except Exception as e:
@@ -121,7 +132,7 @@ if __name__ == "__main__":
         'gender': 'maennlich',  # or 'weiblich' or 'divers'
         'first_name': 'Rene',
         'last_name': 'Oblonczek',
-        'street': 'Eisentraße 54',
+        'street': 'Eisentraße 43',
         'city': '50825 Koeln',
         'student_number': '7354753',
         'email': 'robloncz@smail.uni-koeln.de',
