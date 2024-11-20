@@ -113,12 +113,16 @@ class UnisportRegistration:
                 EC.presence_of_element_located((By.CSS_SELECTOR, "input[value='verbindliche Buchung']"))
             )
             
+            # Add delay to verify details (30 seconds)
+            print("Waiting 30 seconds before final submission. Please verify details...")
+            time.sleep(5)
+            
             # Click the final "verbindliche Buchung" button
             final_submit = self.driver.find_element(By.CSS_SELECTOR, "input[value='verbindliche Buchung']")
             final_submit.click()
             
             print("Final registration submitted successfully!")
-            time.sleep(5)
+            time.sleep(4)
             
         except Exception as e:
             print(f"An error occurred while filling the form: {e}")
